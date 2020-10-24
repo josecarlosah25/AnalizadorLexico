@@ -6,19 +6,27 @@ Elaborado por :
 	-Vargas Guerrero Armando
 */
 %}
+/*Expresiones regulares recurrentes*/
+whatEver [^""]
+dig [0-9]
 /*Definimos las cosas que omitimos*/
 tab \t
 salto \n
 spaceBar (\ )
+comment @[^\n]*{salto}
 omite {tab}|{salto}|{spaceBar}
 /*Definimos las constantes numéricas reales*/
-dig [0-9]
 dot \.
 notCien (E|e)((-?)|(\+?)){dig}{1,5}
 cNumReal {dig}{1,10}{dot}({dig}{1,10}{notCien}?)
+/*Definimos las cadenas*/
+str \"{whatEver}*\"
+/*Def*/
 %%
 {cNumReal} {printf("Es un numero real valido\n");}
-{omite} {}
+{omite} {printf("voy a omitir algo\n");}
+{str} {printf("esto es una cadena\n");}
+{comment} {printf("esto es un comment");}
 %%
 main()
 {
