@@ -9,3 +9,9 @@ $git git log --oneline		ver historial de commits
 $git status -s			vemos el estatus de nuestros archivos locales(modificado)
 $git branch nombreBranch	creamos un branch de nombreBranch
 $git push --set-upstream origin nombreBranch	Ponemos en linea(github) el branch
+
+Para compilar lex
+$ flex anLex.l
+$ gcc lex.yy.c -lfl
+$ ./a.out
+
