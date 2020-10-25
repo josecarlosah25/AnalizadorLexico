@@ -15,6 +15,8 @@ salto \n
 spaceBar (\ )
 comment @[^\n]*{salto}
 omite {tab}|{salto}|{spaceBar}
+/*Definimos las constantes numéricas enteras*/
+cNumEnt {dig}{1,14}
 /*Definimos las constantes numéricas reales*/
 dot \.
 notCien (E|e)((-?)|(\+?)){dig}{1,5}
@@ -27,9 +29,9 @@ str \"{whatEver}*\"
 {omite} {printf("voy a omitir algo\n");}
 {str} {printf("esto es una cadena\n");}
 {comment} {printf("esto es un comment");}
+{cNumEnt} {printf("esto es un numero entero");}
 %%
 main()
 {
 	yylex();
 }
-
