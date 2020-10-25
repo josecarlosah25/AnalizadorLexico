@@ -3,68 +3,68 @@
 
 int numClave = 0;
 
-typedef struct Nodo{
+typedef struct NodoCat{
 	int clave;
-	char* palabra;
-	struct Nodo* siguiente;
-}Nodo;
+	char* contenido;
+	struct NodoCat* siguiente;
+}NodoCat;
 
 typedef struct {
-	Nodo* head;
+	NodoCat* head;
 
-}Lista;
+}Catalogo;
 
-Lista crearLista(){
-	Lista lista;
-	lista.head = NULL;
-	return lista;
+Catalogo crearCatalogo(){
+	Catalogo catalogo;
+	catalogo.head = NULL;
+	return catalogo;
 }
 
-void insertar(Lista* listaActual, char* valor){
-	Nodo* temp = listaActual->head;
-	Nodo* actual = (Nodo *)malloc(sizeof(Nodo));
+void insertarCatalogo(Catalogo* catActual, char* valor){
+	NodoCat* temp = catActual->head;
+	NodoCat* actual = (NodoCat *)malloc(sizeof(NodoCat));
 
 	if(temp == NULL){
 		actual->clave = numClave;
-		actual->palabra = valor;
+		actual->contenido = valor;
 		actual->siguiente = NULL;
-		listaActual->head = actual;
-		//printf("Si inserte\n");
+		catActual->head = actual;
 	}
 	else{
 		while(temp->siguiente != NULL)
 			temp = temp->siguiente;
-			//if(temp->siguiente == NULL){
+
 		numClave++;
 		actual->clave = numClave;
-		actual->palabra = valor;
+		actual->contenido = valor;
 		actual->siguiente = NULL;
 		temp->siguiente = actual;
-		//printf("Si inserte\n");
 			
 	}
 	
 
 }
 
-void imprimirLista(Lista listaActual){
+void imprimirCatalogo(Catalogo catActual){
 	
-	if (listaActual.head == NULL)
-		printf("Lista vacia\n");
+	if (catActual.head == NULL)
+		printf("La tabla esta vacia\n");
 	else{
-		Nodo* ptr = listaActual.head;
-		while(ptr!= NULL){
-			printf("%d -> %s\n", ptr->clave, ptr->palabra);
-			ptr = ptr->siguiente;
+		NodoCat* actual = catActual.head;
+		printf("Posicion \t_ \tContenido\n");
+		while(actual!= NULL){
+			printf(" %d \t\t| \t %s\n", actual->clave, actual->contenido);
+			actual = actual->siguiente;
 		}
 	}
 }
 
-void busqueda(Lista* listaActual, int dato){
-    Nodo *temp = listaActual->head;
+void buscarCatalogo(Catalogo* catActual, char* cadena){
+    NodoCat *temp = catActual->head;
     while (temp != NULL) {
-        if (temp->clave == dato){
-            printf("\n Se encuentra el numero %d en la lista \n", dato);
+        if (temp->contenido == cadena){
+            printf("\nSe encuentra la palabra %s en el catalogo y su clave es %d \n", cadena, temp->clave);
+            //return clave;
             break;
         }
         else
@@ -73,11 +73,12 @@ void busqueda(Lista* listaActual, int dato){
 }
 
 int main(){
-	Lista tabla = crearLista();
-	insertar(&tabla, "hola");
-	insertar(&tabla, "buenos");
-	insertar(&tabla, "dias");
-	insertar(&tabla, "a");
-	insertar(&tabla, "todos");
-	imprimirLista(tabla);
+	Catalogo catalogo = crearCatalogo();
+	insertarCatalogo(&catalogo, "hola");
+	insertarCatalogo(&catalogo, "buenos");
+	insertarCatalogo(&catalogo, "dias");
+	insertarCatalogo(&catalogo, "a");
+	insertarCatalogo(&catalogo, "todos");
+	buscarCatalogo(&catalogo, "buenos");
+	imprimirCatalogo(catalogo);
 }
