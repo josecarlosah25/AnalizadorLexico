@@ -1,4 +1,6 @@
 %{
+#include <string.h>
+#include <stdlib.h>
 #include "estructurasTablas/generadorTablas.c"
 
 /*Programa que lee un programa y hace el reconocimiento del lenguaje
@@ -10,9 +12,18 @@ Elaborado por :
 */
 
 FILE *archSal;
+char* tmp;
 int clase;
 int valor;
 Catalogo palReserv;
+Catalogo opRel;
+TablaCaracteres simbEsp;
+TablaCaracteres opAsig;
+TablaOperadores opArit;
+TablaLiterales ctesReales;
+TablaLiterales cadenas;
+TablaLiterales ctesEnteras;
+TablaSimbolos tabSimb;
 %}
 /*Expresiones regulares recurrentes*/
 whatEver [^""]
@@ -48,27 +59,49 @@ str \"{whatEver}*\"
 /*Definimos los identificadores*/
 ident {letras}({letras}|{dig}|_)*
 %%
-{palRes} {clase=1;
-valor=buscarCatalogo(&palReserv,yytext);
-printf("%s\n",yytext);
+{palRes} {clase=1; valor=buscarCatalogo(&palReserv,yytext);
 fprintf(archSal,"(%d,%d)\n",clase,valor);}
-{opRel} {fprintf(archSal,"%s: es un operador relacional\n",yytext);}
-{simbEsp} {fprintf(archSal,"%s: es un simbolo especial\n",yytext);}
-{asig} {fprintf(archSal,"%s: es el simbolo de asignación\n",yytext);}
-{opArit} {fprintf(archSal,"%s: es un operador aritmetico\n",yytext);}
-{cNumReal} {fprintf(archSal,"%s: Es un numero real valido\n",yytext);}
-{str} {fprintf(archSal,"%s: esto es una cadena\n",yytext);}
-{comment} {fprintf(archSal,"%s: esto es un comment\n",yytext);}
-{cNumEnt} {fprintf(archSal,"%s: esto es un numero entero\n",yytext);}
-{ident} {fprintf(archSal,"%s: es un identificador\n",yytext);}
+{opRel} {clase=5; valor=buscarCatalogo(&opRel,yytext);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
+{simbEsp} {clase=2; valor=buscarTablaCaracteres(&simbEsp,yytext[0]);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
+{asig} {clase=4; valor=buscarTablaCaracteres(&opAsig,yytext[0]);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
+{opArit} {clase=8;
+fprintf(archSal,"(%d,%c)\n",clase,buscarTablaOperadores(&opArit,yytext));}
+{cNumReal} {clase=0; 
+tmp=(char *)malloc(strlen(yytext)*sizeof(char));
+strcpy(tmp,yytext);
+valor=insertarTablaLiterales(&ctesReales,tmp);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
+{str} {clase=7; 
+tmp=(char *)malloc(strlen(yytext)*sizeof(char));
+strcpy(tmp,yytext);
+valor=insertarTablaLiterales(&cadenas,tmp);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
+{comment}|{omite} {}
+{cNumEnt} {clase=6; 
+tmp=(char *)malloc(strlen(yytext)*sizeof(char));
+strcpy(tmp,yytext);
+valor=insertarTablaLiterales(&ctesEnteras,tmp);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
+{ident} {clase=3; 
+tmp=(char *)malloc(strlen(yytext)*sizeof(char));
+strcpy(tmp,yytext);
+if(buscarTablaSimbolos(&tabSimb,tmp)!=-1){
+	valor=buscarTablaSimbolos(&tabSimb,tmp);
+}else{
+	valor=insertarTablaSimbolos(&tabSimb,tmp);
+}
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
 %%
 main(int argc,char *argv[])
 {
 	palReserv = generarTabPalabrasRes();
-	Catalogo opRel = generarTabOpRelacionales();
-	TablaCaracteres simbEsp = generarTabSimbEspecial();
-	TablaCaracteres opAsig = generarTabOpAsignacion();
-	TablaOperadores opArit = generarTabOpAritmeticos();
+	opRel = generarTabOpRelacionales();
+	simbEsp = generarTabSimbEspecial();
+	opAsig = generarTabOpAsignacion();
+	opArit = generarTabOpAritmeticos();
 
 	imprimirCatalogo(palReserv);
 	imprimirCatalogo(opRel);
@@ -76,25 +109,17 @@ main(int argc,char *argv[])
 	imprimirTablaCaracteres(opAsig);
 	imprimirTablaOperadores(opArit);
 
-	TablaLiterales ctesReales = crearTablaLiterales();
-	TablaLiterales cadenas = crearTablaLiterales();
-	TablaSimbolos tabSimb = crearTablaSimbolos();
-	
-	insertarTablaLiterales(&cadenas, "La");
-	insertarTablaLiterales(&cadenas, "Neta");
-	insertarTablaLiterales(&cadenas, "No");
-	insertarTablaLiterales(&cadenas, "Me");
-	insertarTablaLiterales(&cadenas, "Gusta");
-	insertarTablaLiterales(&cadenas, "Como");
-	insertarTablaLiterales(&cadenas, "Se");
-	insertarTablaLiterales(&cadenas, "Da");
-	insertarTablaLiterales(&cadenas, "Esta");
-	insertarTablaLiterales(&cadenas, "Materia");
-
-	imprimirTablaLiterales(cadenas);
+	ctesReales = crearTablaLiterales();
+	cadenas = crearTablaLiterales();
+	ctesEnteras = crearTablaLiterales();
+	tabSimb = crearTablaSimbolos();
 
 	yyin=fopen(argv[1],"r");
 	archSal=fopen("salida.txt","w");
 	yylex();
+	imprimirTablaLiterales(cadenas);
+	imprimirTablaLiterales(ctesEnteras);
+	imprimirTablaLiterales(ctesReales);
+	imprimirTablaSimbolos(tabSimb);
 	close(archSal);
 }

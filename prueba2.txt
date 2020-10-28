@@ -1,0 +1,11 @@
+@Pueba identificadores
+Prob_nose234_ident
+lol23_pro2
+@Prueba numeros enteros y reales
+234.9753	437.374e-12	3.45E12 24.36e+23	75.0e12
+35	0	12324	3556
+@Prueba de cadenas
+"holaaa broos" "esto ya funciona"  "++{-276384axvbt+WFGESCV+.ñ.-" "se supone"
+@Simbolos y demás ya se comprobó que se leen
+{}**-}}{  @probando los comentaruis jsjdjsa
+**24%*1
