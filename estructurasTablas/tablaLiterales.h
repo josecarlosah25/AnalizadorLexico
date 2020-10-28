@@ -18,7 +18,7 @@ TablaLiterales crearTablaLiterales(){
 	return tablaLit;
 }
 
-void insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
+int insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
 	NodoLit* temp = tablaLit->head;
 	NodoLit* actual = (NodoLit *)malloc(sizeof(NodoLit));
 
@@ -27,6 +27,8 @@ void insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
 		actual->cadena = valor;
 		actual->siguiente = NULL;
 		tablaLit->head = actual;
+		//printf("La posicion que ocupa la cadena en la tabla es: %d\n", actual->clave);
+		return actual-clave;
 	}
 	else{
 		while(temp->siguiente != NULL)
@@ -36,6 +38,8 @@ void insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
 		actual->cadena = valor;
 		actual->siguiente = NULL;
 		temp->siguiente = actual;
+		printf("La posicion que ocupa la cadena en la tabla es: %d\n", actual->clave);
+		return actual->clave;
 			
 	}
 	
