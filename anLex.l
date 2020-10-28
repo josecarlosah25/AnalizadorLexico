@@ -112,7 +112,6 @@ int main(int argc,char *argv[])
 
 	ctesReales = crearTablaLiterales();
 	cadenas = crearTablaLiterales();
-	ctesEnteras = crearTablaLiterales();
 	tabSimb = crearTablaSimbolos();
 
 	yyin=fopen(argv[1],"r");
@@ -120,7 +119,6 @@ int main(int argc,char *argv[])
 	fprintf(archSal, "-----TOKENS GENERADOS----\n");
 	yylex();
 	imprimirTablaLiterales(cadenas, archSal);
-	imprimirTablaLiterales(ctesEnteras, archSal);
 	imprimirTablaLiterales(ctesReales, archSal);
 	imprimirTablaSimbolos(tabSimb, archSal);
 
