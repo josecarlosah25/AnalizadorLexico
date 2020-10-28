@@ -59,7 +59,8 @@ void imprimirTablaOperadores(TablaOperadores tabOpActual){
 char buscarTablaOperadores(TablaOperadores* tabOpActual, char operador[2]){
     NodoOp *temp = tabOpActual->head;
     while (temp != NULL) {
-        if (temp->caracteres == operador){
+
+        if (strcmp(temp->caracteres, operador) == 0){
         	if(strcmp(operador, "**") == 0){
         		int clavePotencia = 0;
         		printf("\nSe encuentra el simbolo %s en la Tabla de Operadores y su clave es %d \n", operador, clavePotencia);
@@ -67,8 +68,8 @@ char buscarTablaOperadores(TablaOperadores* tabOpActual, char operador[2]){
         		//break;
         	}
         	else{
-            	printf("\nSe encuentra el simbolo %c en la Tabla de Operadores y su simbolo es %s \n", operador[0], temp->caracteres);
-            	return temp->caracteres;
+            	printf("\nSe encuentra el simbolo %c en la Tabla de Operadores y devuelve %s \n", operador[0], temp->caracteres);
+            	return atoi(temp->caracteres);
             	//break;
         	}
         }
