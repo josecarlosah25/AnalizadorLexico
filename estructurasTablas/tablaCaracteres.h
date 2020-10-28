@@ -30,6 +30,7 @@ void insertarTablaCaracteres(TablaCaracteres* tabCarActual, char valor){
 		actual->siguiente = NULL;
 		actual->ascii = valor;
 		tabCarActual->head = actual;
+		
 	}
 	else{
 		while(temp->siguiente != NULL)
@@ -40,6 +41,7 @@ void insertarTablaCaracteres(TablaCaracteres* tabCarActual, char valor){
 		actual->siguiente = NULL;
 		actual->ascii = valor;
 		temp->siguiente = actual;
+
 			
 	}
 	
@@ -60,17 +62,18 @@ void imprimirTablaCaracteres(TablaCaracteres tabCarActual){
 	}
 }
 
-void buscarTablaCaracteres(TablaCaracteres* tabCarActual, char caracter){
+int buscarTablaCaracteres(TablaCaracteres* tabCarActual, char caracter){
     NodoCar *temp = tabCarActual->head;
     while (temp != NULL) {
         if (temp->caracter == caracter){
         	printf("\nSe encuentra el simbolo %c en la Tabla y su codigo ASCII es %d \n", caracter, temp->ascii);
-        	//return clave;
-        	break;
+        	return temp->ascii;
+        	//break;
         	
         }
         else
             temp = temp->siguiente;
     }
+    return -1;
 }
 
