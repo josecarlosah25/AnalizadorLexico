@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct NodoCat{
 	int clave;
@@ -56,16 +57,17 @@ void imprimirCatalogo(Catalogo catActual){
 	}
 }
 
-void buscarCatalogo(Catalogo* catActual, char* cadena){
+int buscarCatalogo(Catalogo* catActual, char* cadena){
     NodoCat *temp = catActual->head;
     while (temp != NULL) {
-        if (temp->contenido == cadena){
+        if (strcmp(temp->contenido,cadena)==0){
             printf("\nSe encuentra el valor %s en el catalogo y su clave es %d \n", cadena, temp->clave);
-            //return clave;
+            return temp->clave;
             break;
         }
         else
             temp = temp->siguiente;
     }
+return -1;
 }
 

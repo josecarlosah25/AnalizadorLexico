@@ -1,9 +1,5 @@
 %{
-#include "estructurasTablas/catalogos.h"
-#include "estructurasTablas/tablaLiterales.h"
-#include "estructurasTablas/tablaCaracteres.h"
-#include "estructurasTablas/tablaOpAritmeticos.h"
-#include "estructurasTablas/tablaSimbolos.h"
+#include "estructurasTablas/generadorTablas.c"
 
 /*Programa que lee un programa y hace el reconocimiento del lenguaje
 	definido por la clase
@@ -14,6 +10,9 @@ Elaborado por :
 */
 
 FILE *archSal;
+int clase;
+int valor;
+Catalogo palReserv;
 %}
 /*Expresiones regulares recurrentes*/
 whatEver [^""]
@@ -49,7 +48,10 @@ str \"{whatEver}*\"
 /*Definimos los identificadores*/
 ident {letras}({letras}|{dig}|_)*
 %%
-{palRes} {fprintf(archSal,"%s: es una palabra reservada\n",yytext);}
+{palRes} {clase=1;
+valor=buscarCatalogo(&palReserv,yytext);
+printf("%s\n",yytext);
+fprintf(archSal,"(%d,%d)\n",clase,valor);}
 {opRel} {fprintf(archSal,"%s: es un operador relacional\n",yytext);}
 {simbEsp} {fprintf(archSal,"%s: es un simbolo especial\n",yytext);}
 {asig} {fprintf(archSal,"%s: es el simbolo de asignación\n",yytext);}
@@ -62,6 +64,35 @@ ident {letras}({letras}|{dig}|_)*
 %%
 main(int argc,char *argv[])
 {
+	palReserv = generarTabPalabrasRes();
+	Catalogo opRel = generarTabOpRelacionales();
+	TablaCaracteres simbEsp = generarTabSimbEspecial();
+	TablaCaracteres opAsig = generarTabOpAsignacion();
+	TablaOperadores opArit = generarTabOpAritmeticos();
+
+	imprimirCatalogo(palReserv);
+	imprimirCatalogo(opRel);
+	imprimirTablaCaracteres(simbEsp);
+	imprimirTablaCaracteres(opAsig);
+	imprimirTablaOperadores(opArit);
+
+	TablaLiterales ctesReales = crearTablaLiterales();
+	TablaLiterales cadenas = crearTablaLiterales();
+	TablaSimbolos tabSimb = crearTablaSimbolos();
+	
+	insertarTablaLiterales(&cadenas, "La");
+	insertarTablaLiterales(&cadenas, "Neta");
+	insertarTablaLiterales(&cadenas, "No");
+	insertarTablaLiterales(&cadenas, "Me");
+	insertarTablaLiterales(&cadenas, "Gusta");
+	insertarTablaLiterales(&cadenas, "Como");
+	insertarTablaLiterales(&cadenas, "Se");
+	insertarTablaLiterales(&cadenas, "Da");
+	insertarTablaLiterales(&cadenas, "Esta");
+	insertarTablaLiterales(&cadenas, "Materia");
+
+	imprimirTablaLiterales(cadenas);
+
 	yyin=fopen(argv[1],"r");
 	archSal=fopen("salida.txt","w");
 	yylex();

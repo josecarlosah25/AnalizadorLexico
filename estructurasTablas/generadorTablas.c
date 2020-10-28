@@ -81,35 +81,3 @@ TablaOperadores generarTabOpAritmeticos(){
 }
 
 
-int main(){
-	Catalogo palReserv = generarTabPalabrasRes();
-	Catalogo opRel = generarTabOpRelacionales();
-	TablaCaracteres simbEsp = generarTabSimbEspecial();
-	TablaCaracteres opAsig = generarTabOpAsignacion();
-	TablaOperadores opArit = generarTabOpAritmeticos();
-
-	imprimirCatalogo(palReserv);
-	imprimirCatalogo(opRel);
-	imprimirTablaCaracteres(simbEsp);
-	imprimirTablaCaracteres(opAsig);
-	imprimirTablaOperadores(opArit);
-
-	TablaLiterales ctesReales = crearTablaLiterales();
-	TablaLiterales cadenas = crearTablaLiterales();
-	TablaSimbolos tabSimb = crearTablaSimbolos();
-
-	insertarTablaLiterales(&cadenas, "La");
-	insertarTablaLiterales(&cadenas, "Neta");
-	insertarTablaLiterales(&cadenas, "No");
-	insertarTablaLiterales(&cadenas, "Me");
-	insertarTablaLiterales(&cadenas, "Gusta");
-	insertarTablaLiterales(&cadenas, "Como");
-	insertarTablaLiterales(&cadenas, "Se");
-	insertarTablaLiterales(&cadenas, "Da");
-	insertarTablaLiterales(&cadenas, "Esta");
-	insertarTablaLiterales(&cadenas, "Materia");
-
-	imprimirTablaLiterales(cadenas);
-
-
-}
