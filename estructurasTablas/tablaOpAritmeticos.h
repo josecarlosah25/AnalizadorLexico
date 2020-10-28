@@ -62,14 +62,15 @@ char buscarTablaOperadores(TablaOperadores* tabOpActual, char operador[2]){
 
         if (strcmp(temp->caracteres, operador) == 0){
         	if(strcmp(operador, "**") == 0){
-        		int clavePotencia = 0;
+        		int clavePotencia = 48; //Código ASCII del 0 
         		printf("\nSe encuentra el simbolo %s en la Tabla de Operadores y su clave es %d \n", operador, clavePotencia);
         		return clavePotencia;
         		//break;
         	}
         	else{
             	printf("\nSe encuentra el simbolo %c en la Tabla de Operadores y devuelve %s \n", operador[0], temp->caracteres);
-            	return atoi(temp->caracteres);
+            	//printf("\naaaaa%d", atoi(temp->caracteres));
+            	return temp->caracteres[0];
             	//break;
         	}
         }
