@@ -19,7 +19,7 @@ TablaSimbolos crearTablaSimbolos(){
 	return tablaSimbolos;
 }
 
-void insertarTablaSimbolos(TablaSimbolos* tabSimbActual, char* valor){
+int insertarTablaSimbolos(TablaSimbolos* tabSimbActual, char* valor){
 	NodoSimb* temp = tabSimbActual->head;
 	NodoSimb* actual = (NodoSimb *)malloc(sizeof(NodoSimb));
 
@@ -29,6 +29,8 @@ void insertarTablaSimbolos(TablaSimbolos* tabSimbActual, char* valor){
 		actual->siguiente = NULL;
 		actual->tipo = -1;
 		tabSimbActual->head = actual;
+		//printf("La posicion que ocupa la cadena en la tabla es: %d\n", actual->clave);
+		return actual->clave;
 	}
 	else{
 		while(temp->siguiente != NULL)
@@ -39,7 +41,8 @@ void insertarTablaSimbolos(TablaSimbolos* tabSimbActual, char* valor){
 		actual->siguiente = NULL;
 		actual->tipo = -1;
 		temp->siguiente = actual;
-			
+		//printf("La posicion que ocupa la cadena en la tabla es: %d\n", actual->clave);
+		return actual->clave;
 	}
 	
 
@@ -59,16 +62,17 @@ void imprimirTablaSimbolos(TablaSimbolos tabSimbActual){
 	}
 }
 
-void buscarTablaSimbolos(TablaSimbolos* tabSimbActual, char* cadena){
+int buscarTablaSimbolos(TablaSimbolos* tabSimbActual, char* cadena){
     NodoSimb *temp = tabSimbActual->head;
     while (temp != NULL) {
         if (temp->nombre == cadena){
-            printf("\nSe encuentra la palabra %s en el Tabla de Simbolos y su clave es %d \n", cadena, temp->clave);
-            //return clave;
-            break;
+            //printf("\nSe encuentra la palabra %s en el Tabla de Simbolos y su clave es %d \n", cadena, temp->clave);
+            return temp->clave;
+            //break;
         }
         else
             temp = temp->siguiente;
     }
+    return -1;
 }
 
