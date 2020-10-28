@@ -75,7 +75,6 @@ TablaOperadores generarTabOpAritmeticos(){
 	insertarTablaOperadores(&tabOpArit, "/");
 	insertarTablaOperadores(&tabOpArit, "%");
 	insertarTablaOperadores(&tabOpArit, "**");
-	insertarTablaOperadores(&tabOpArit, "]");
 
 	return tabOpArit;
 }

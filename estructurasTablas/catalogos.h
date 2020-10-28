@@ -61,7 +61,7 @@ int buscarCatalogo(Catalogo* catActual, char* cadena){
     NodoCat *temp = catActual->head;
     while (temp != NULL) {
         if (strcmp(temp->contenido,cadena)==0){
-            printf("\nSe encuentra el valor %s en el catalogo y su clave es %d \n", cadena, temp->clave);
+            //printf("\nSe encuentra el valor %s en el catalogo y su clave es %d \n", cadena, temp->clave);
             return temp->clave;
             break;
         }

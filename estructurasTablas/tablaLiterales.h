@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+FILE *archSal;
+
 typedef struct NodoLit{
 	int clave;
 	char* cadena;
@@ -38,7 +40,7 @@ int insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
 		actual->cadena = valor;
 		actual->siguiente = NULL;
 		temp->siguiente = actual;
-		printf("La posicion que ocupa la cadena en la tabla es: %d\n", actual->clave);
+		//printf("La posicion que ocupa la cadena recien insertada en la tabla es: %d\n", actual->clave);
 		return actual->clave;
 			
 	}
@@ -46,15 +48,20 @@ int insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
 
 }
 
-void imprimirTablaLiterales(TablaLiterales tablaLit){
+void imprimirTablaLiterales(TablaLiterales tablaLit, FILE *archSal){
 	
 	if (tablaLit.head == NULL)
 		printf("La tabla esta vacia\n");
 	else{
 		NodoLit* actual = tablaLit.head;
+		printf("\n-----TABLA DE LITERALES-----");
 		printf("\nPosicion \t_ \tCadena\n");
+		fprintf(archSal, "\n------TABLA DE LITERALES-----");
+		fprintf(archSal, "\nPosicion \t_ \tCadena\n");
 		while(actual!= NULL){
+			
 			printf(" %d \t\t| \t %s\n", actual->clave, actual->cadena);
+			fprintf(archSal, " %d \t\t| \t %s\n", actual->clave, actual->cadena);
 			actual = actual->siguiente;
 		}
 	}
