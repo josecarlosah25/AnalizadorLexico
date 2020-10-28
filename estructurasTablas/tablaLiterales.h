@@ -28,7 +28,7 @@ int insertarTablaLiterales(TablaLiterales* tablaLit, char* valor){
 		actual->siguiente = NULL;
 		tablaLit->head = actual;
 		//printf("La posicion que ocupa la cadena en la tabla es: %d\n", actual->clave);
-		return actual-clave;
+		return actual->clave;
 	}
 	else{
 		while(temp->siguiente != NULL)
