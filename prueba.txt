@@ -1,4 +1,24 @@
-"cadena"  1324.23e-12	@hola esto ya es un coment
-243
-	"fseijfj34958.+.{"
+"cadena" 243 1324.23e-12	@hola esto ya es un coment
+"fseijfj34958.+.{"
 EstoEsVariable 453val_l3_esIdentificador"hello"
+bool
+break
+case
+char
+continue
+default
+do
+else
+float
+for
+if
+int
+return
+string
+switch
+while
+void
+!===><>=<=
++-*/**%
+=
+{},:()[]
