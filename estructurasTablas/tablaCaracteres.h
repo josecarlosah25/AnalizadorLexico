@@ -66,7 +66,7 @@ int buscarTablaCaracteres(TablaCaracteres* tabCarActual, char caracter){
     NodoCar *temp = tabCarActual->head;
     while (temp != NULL) {
         if (temp->caracter == caracter){
-        	printf("\nSe encuentra el simbolo %c en la Tabla y su codigo ASCII es %d \n", caracter, temp->ascii);
+        	//printf("\nSe encuentra el simbolo %c en la Tabla y su codigo ASCII es %d \n", caracter, temp->ascii);
         	return temp->ascii;
         	//break;
         	
