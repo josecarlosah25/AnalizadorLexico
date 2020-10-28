@@ -25,6 +25,7 @@ TablaLiterales cadenas;
 TablaLiterales ctesEnteras;
 TablaSimbolos tabSimb;
 %}
+
 /*Expresiones regulares recurrentes*/
 whatEver [^""]
 dig [0-9]
@@ -83,8 +84,8 @@ fprintf(archSal,"(%d,%d)\n",clase,valor);}
 {cNumEnt} {clase=6; 
 tmp=(char *)malloc(strlen(yytext)*sizeof(char));
 strcpy(tmp,yytext);
-valor=insertarTablaLiterales(&ctesEnteras,tmp);
-fprintf(archSal,"(%d,%d)\n",clase,valor);}
+/*valor=insertarTablaLiterales(&ctesEnteras,tmp);*/
+fprintf(archSal,"(%d,%d)\n",clase,atoi(tmp));}
 {ident} {clase=3; 
 tmp=(char *)malloc(strlen(yytext)*sizeof(char));
 strcpy(tmp,yytext);
@@ -95,7 +96,7 @@ if(buscarTablaSimbolos(&tabSimb,tmp)!=-1){
 }
 fprintf(archSal,"(%d,%d)\n",clase,valor);}
 %%
-main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
 	palReserv = generarTabPalabrasRes();
 	opRel = generarTabOpRelacionales();
@@ -116,10 +117,13 @@ main(int argc,char *argv[])
 
 	yyin=fopen(argv[1],"r");
 	archSal=fopen("salida.txt","w");
+	fprintf(archSal, "-----TOKENS GENERADOS----\n");
 	yylex();
-	imprimirTablaLiterales(cadenas);
-	imprimirTablaLiterales(ctesEnteras);
-	imprimirTablaLiterales(ctesReales);
-	imprimirTablaSimbolos(tabSimb);
+	imprimirTablaLiterales(cadenas, archSal);
+	imprimirTablaLiterales(ctesEnteras, archSal);
+	imprimirTablaLiterales(ctesReales, archSal);
+	imprimirTablaSimbolos(tabSimb, archSal);
+
+
 	close(archSal);
 }

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+FILE *archSal;
+
 typedef struct NodoSimb{
 	int clave;
 	char* nombre;
@@ -48,15 +50,19 @@ int insertarTablaSimbolos(TablaSimbolos* tabSimbActual, char* valor){
 
 }
 
-void imprimirTablaSimbolos(TablaSimbolos tabSimbActual){
+void imprimirTablaSimbolos(TablaSimbolos tabSimbActual, FILE *archSal){
 	
 	if (tabSimbActual.head == NULL)
 		printf("La tabla esta vacia\n");
 	else{
 		NodoSimb* actual = tabSimbActual.head;
-		printf("\nPosicion \t_ \tNombre \t_ \tTipo\n");
+		printf("\n------TABLA DE SIMBOLOS-----");
+		printf("\nPosicion \t_ \tNombre \t\t\t\t_ \tTipo\n");
+		fprintf(archSal, "\n------TABLA DE SIMBOLOS-----");
+		fprintf(archSal, "\nPosicion \t_ \tNombre \t\t\t\t_ \tTipo\n");
 		while(actual!= NULL){
 			printf(" %d \t\t| \t %s \t\t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
+			fprintf(archSal, " %d \t\t| \t %s \t\t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
 			actual = actual->siguiente;
 		}
 	}
