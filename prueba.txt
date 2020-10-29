@@ -23,3 +23,6 @@ void
 =
 {},:()[]
 45.e-12
+variableRoja=14:
+variableVerde=14.63:
+int variableRoja=16.3e5:
