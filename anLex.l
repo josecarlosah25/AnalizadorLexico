@@ -92,9 +92,7 @@ ident {letras}({letras}|{dig}|_)*
 	fprintf(archSal,"(%d,%d)\n",clase,valor);}
 {comment}|{omite} {}
 {cNumEnt} {clase=6; 
-	tmp=(char *)malloc(strlen(yytext)*sizeof(char));
-	strcpy(tmp,yytext);
-	fprintf(archSal,"(%d,%d)\n",clase,atoi(tmp));}
+	fprintf(archSal,"(%d,%s)\n",clase,yytext);}
 {ident} {clase=3; 
 	tmp=(char *)malloc(strlen(yytext)*sizeof(char));
 	strcpy(tmp,yytext);
