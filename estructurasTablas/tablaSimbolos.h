@@ -61,8 +61,14 @@ void imprimirTablaSimbolos(TablaSimbolos tabSimbActual, FILE *archSal){
 		fprintf(archSal, "\n------TABLA DE SIMBOLOS-----");
 		fprintf(archSal, "\nPosicion \t_ \tNombre \t\t\t\t_ \tTipo\n");
 		while(actual!= NULL){
-			printf(" %d \t\t| \t %s \t\t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
-			fprintf(archSal, " %d \t\t| \t %s \t\t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
+			if (strlen(actual->nombre) <= 14){
+				printf(" %d \t\t| \t %s \t\t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
+				fprintf(archSal, " %d \t\t| \t %s \t\t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
+			}
+			else{
+				printf(" %d \t\t| \t %s \t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
+				fprintf(archSal, " %d \t\t| \t %s \t| \t %d\n", actual->clave, actual->nombre, actual->tipo);
+			}
 			actual = actual->siguiente;
 		}
 	}
@@ -71,7 +77,7 @@ void imprimirTablaSimbolos(TablaSimbolos tabSimbActual, FILE *archSal){
 int buscarTablaSimbolos(TablaSimbolos* tabSimbActual, char* cadena){
     NodoSimb *temp = tabSimbActual->head;
     while (temp != NULL) {
-        if (temp->nombre == cadena){
+        if (strcmp(temp->nombre,cadena) == 0){
             //printf("\nSe encuentra la palabra %s en el Tabla de Simbolos y su clave es %d \n", cadena, temp->clave);
             return temp->clave;
             //break;
