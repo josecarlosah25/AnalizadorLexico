@@ -1,0 +1,25 @@
+@En este scritp deberian de listarse puros errores
+@N reales
+0.2e*2	0.2m+1 .76e-12 0.e23
+@pal reservaras-> los errores deberian de catalogarse como identificadores
+booln
+integer
+foreach
+retun
+@simbolos especiales, no puede haber un error, a menos que se introduzcan simbolos extraños
+. ' ~
+@identificadores: no se reconoceran todos, o sera un reconocimiento erroneo
+variable.1	3erColor	__identDelSO	*hola
+@operador de asignacion no hay error
+@op rel, si se separan en 2 cadenas, error
+! = 	< =
+@constantes numericas, la longitud
+111111111111 123456789012345678
+@Cadenas, si no se cierra, nunca terminaria de reconocer una cadena
+"esto es una cadena
+a=12:
+printf("hola muuundoo") "@ cerramos con la cadena para que sigamos haciendo pruebas
+@operadores aritmeticos, si separamos ** con un espacio, se convierte en operador *
+* * 		*  *  
+
+

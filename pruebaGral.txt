@@ -1,0 +1,42 @@
+@num real
+0.28743	245.0	245789.1e-12	3453.094E12	658.5e+34 0.2E34
+@pal reservadas
+bool
+break
+case
+char
+continue
+default
+do
+else
+float
+for
+if
+int
+return
+string
+switch
+while
+void
+@simbolos especiales
+{} , : () []
+@Identificadores
+variable1 v2_345 g_245fh	m_a75
+@asigancion
+= =  =		=
+=
+@op relacionales
+!===><>=<= @atencion a que si se separan por un espacio, los que llevan "=" dejan de ser operadores delacionales y pasan a ser asignacion ej. no hacer: ! = , correcto: !=
+@num base 10
+0	1	2	37643	18475838
+@cadenas
+"a ver funciona"	"goyaaa"	"esto es muy antigoya" "voy a probar si le doy un enterque pasa jsjsjs->
+<-ya di el enter, esperemos no se muera"
+"se murio?"
+@Operadores aritmeticos
+1+1
+1*1
+1/1
+1**1
+1%1
+
