@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 FILE *archSal;
 
 typedef struct NodoSimb{
@@ -77,7 +77,8 @@ void imprimirTablaSimbolos(TablaSimbolos tabSimbActual, FILE *archSal){
 int buscarTablaSimbolos(TablaSimbolos* tabSimbActual, char* cadena){
     NodoSimb *temp = tabSimbActual->head;
     while (temp != NULL) {
-        if (strcmp(temp->nombre,cadena) == 0){
+
+        if (strcmp(temp->nombre,cadena)==0){
             //printf("\nSe encuentra la palabra %s en el Tabla de Simbolos y su clave es %d \n", cadena, temp->clave);
             return temp->clave;
             //break;

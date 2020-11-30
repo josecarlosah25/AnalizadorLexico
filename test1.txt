@@ -1,0 +1,10 @@
+int A=12:
+for (2,4,1)
+{
+	print("Holaaa mundoo"):
+	int C=42.45:
+	float B=A*C:
+	print(C):
+	C=0.1e45:
+}
+
